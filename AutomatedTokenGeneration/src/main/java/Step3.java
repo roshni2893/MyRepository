@@ -1,10 +1,16 @@
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class Step3 {
-	public static String step3(String accounRequestId) {
+	public static String step3(String accounRequestId) throws InterruptedException {
 
 		String url = "https://psd2.apiboidev.com/openbanking-nOAuth/oauth/authorize";
 		MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
@@ -18,12 +24,35 @@ public class Step3 {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParams(paramsMap);
 		UriComponents finalUri = builder.build();
 		System.out.println("step 3 final uri is: " + finalUri);
-
+		
+		// loading web driver for chrome and setting its path
+		System.setProperty("webdriver.chrome.driver", "C:\\STS\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		
 		// 1) Url HIT
+		driver.get(finalUri.toString());
+		Thread.sleep(2000);
 		// 2) Click on Login Button
+		driver.findElement(By.className("btn-primary")).click();
+		Thread.sleep(2000);
 		// 3) Enter "BOI888" in Username field
+		WebElement xx = driver.findElement(By.id("username"));
+		xx.sendKeys("BOI888");
+		Thread.sleep(2000);
+		
+		//List<WebElement> x = driver.findElements(By.className("ng-pristine"));
+		//System.out.println(x);
+		//driver.findElement(By.id("username")).sendKeys("BOI888");
+		//driver.findElement(By.tagName("username")).sendKeys("BOI888");
+		//driver.findElement(By.className("form-control")).sendKeys("BOI888");
 		// 4) Enter "8888" in OTP field
+		WebElement pwd = driver.findElement(By.id("OTP"));
+			pwd.sendKeys("8888");
+			Thread.sleep(2000);
 		// 5) Click on Login Button
+			WebElement loginButton=driver.findElement(By.id("submitLogin"));
+			loginButton.click();
+			Thread.sleep(2000);
 		// 6) Click on "select all" checkbox
 		// 7) Click on continue Button
 		// 8) Click on "I consent" checkbox
