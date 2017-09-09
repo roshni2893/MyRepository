@@ -15,7 +15,7 @@ public class Step2 {
 		RestTemplate restTemplate = new RestTemplate();
 		// url
 		String url = "https://psd2.apiboidev.com/1/api/open-banking/v1.0/account-requests";
-		System.out.println("step 2 final url is: "+url);
+		System.out.println("url is: "+url);
 		// body
 		String requestJson = "{\"Data\": {\"Permissions\": [\"ReadAccountsDetail\",\"ReadTransactionsCredits\",\"ReadTransactionsDetail\"],\"ExpirationDateTime\": \"2018-01-19T00:00:00.875\",\"TransactionFromDateTime\": \"2014-01-19T00:00:00.800\",\"TransactionToDateTime\": \"2017-01-19T00:00:00.345\"},\"Risk\": {} }";
 		// headers

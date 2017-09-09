@@ -12,7 +12,6 @@ public class Step4 {
 		// Step4
 		//String code = "9OsCQH";
 		String url4 = "https://psd2.apiboidev.com/openbanking-nOAuth/oauth/token";
-		System.out.println("step 2 final url is: "+url4);
 		MultiValueMap<String, String> params4Map = new LinkedMultiValueMap<>();
 		params4Map.add("code", code);
 		params4Map.add("state", "8768767");
@@ -23,7 +22,6 @@ public class Step4 {
 		params4Map.add("redirect_uri", "https://www.getpostman.com/oauth2/callback");
 		Map<String, String> headers4Map = new HashMap<>();
 		String apiAccessToken = Step1.getValueFromGetApiCall(url4, params4Map, headers4Map, "access_token");
-		return apiAccessToken;
+		return "Bearer "+apiAccessToken;
 	}
-
 }

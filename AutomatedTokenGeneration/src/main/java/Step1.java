@@ -24,7 +24,6 @@ public class Step1 {
 		paramsMap.add("client_secret", "bf5b58ee0bbe473dA221DE7AA9D175A0");
 		paramsMap.add("grant_type", "client_credentials");
 		Map<String, String> headersMap = new HashMap<>();
-		headersMap.put("x", "x");
 		String clientCredAccessToken = getValueFromGetApiCall(url, paramsMap, headersMap, "access_token");
 		return clientCredAccessToken;
 	}
@@ -33,7 +32,7 @@ public class Step1 {
 			Map<String, String> queryHeaders, String requiredValue) throws IOException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParams(queryParamsMap);
 		UriComponents finalUri = builder.build();
-		System.out.println("step 1 final uri is: "+finalUri);
+		System.out.println("url is: "+finalUri);
 		RestTemplate rt = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAll(queryHeaders);
