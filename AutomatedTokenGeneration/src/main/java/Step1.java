@@ -33,6 +33,7 @@ public class Step1 {
 			Map<String, String> queryHeaders, String requiredValue) throws IOException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParams(queryParamsMap);
 		UriComponents finalUri = builder.build();
+		System.out.println("step 1 final uri is: "+finalUri);
 		RestTemplate rt = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAll(queryHeaders);
