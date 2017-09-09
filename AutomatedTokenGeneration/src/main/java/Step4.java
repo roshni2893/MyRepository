@@ -7,10 +7,10 @@ import org.springframework.util.MultiValueMap;
 
 public class Step4 {
 
-	public static String step4(String code2) throws IOException {
+	public static String step4(String code) throws IOException {
 		
 		// Step4
-		String code = "9OsCQH";
+		//String code = "9OsCQH";
 		String url4 = "https://psd2.apiboidev.com/openbanking-nOAuth/oauth/token";
 		MultiValueMap<String, String> params4Map = new LinkedMultiValueMap<>();
 		params4Map.add("code", code);
