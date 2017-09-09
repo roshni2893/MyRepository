@@ -1,36 +1,41 @@
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Step2 {
 
-	public static String step2(String clientCredAccessToken) {
-		// TODO Auto-generated method stub
-		return null;
+	public static String step2(String clientCredAccessToken) throws IOException {
+		RestTemplate restTemplate = new RestTemplate();
+		// url
+		String url = "https://psd2.apiboidev.com/1/api/open-banking/v1.0/account-requests";
+		// body
+		String requestJson = "{\"Data\": {\"Permissions\": [\"ReadAccountsDetail\",\"ReadTransactionsCredits\",\"ReadTransactionsDetail\"],\"ExpirationDateTime\": \"2018-01-19T00:00:00.875\",\"TransactionFromDateTime\": \"2014-01-19T00:00:00.800\",\"TransactionToDateTime\": \"2017-01-19T00:00:00.345\"},\"Risk\": {} }";
+		// headers
+		HttpHeaders headers = new HttpHeaders();
+		Map<String, String> headersMap = new HashMap<>();
+		headersMap.put("Content-Type", "application/json");
+		headersMap.put("Authorization", "Bearer " + clientCredAccessToken);
+		headersMap.put("x-fapi-financial-id", "1234");
+		headersMap.put("client_id", "6443e15975554bce8099e35b88b40465");
+		headersMap.put("client_secret", "7ca382cf4dff4d2dBCF034DBBA34A653");
+		headers.setAll(headersMap);
+
+		HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+
+		Object finalResponse = restTemplate.postForObject(url, entity, Object.class);
+
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(finalResponse);
+		JsonNode rootNode = mapper.readTree(jsonString);
+		JsonNode dataNode = rootNode.path("Data");
+		JsonNode accReqNode = dataNode.path("AccountRequestId");
+		return accReqNode.textValue();
 	}
-
 }
-
-
-
-// Step2
-// url : https://psd2.apiboidev.com/1/api/open-banking/v1.0/account-requests
-// headers:
-// Content-Type : application/json
-//Authorization : clientCredAccessToken variable
-//x-fapi-financial-id : 123
-//client_id : 6443e15975554bce8099e35b88b40465
-//client_secret : 7ca382cf4dff4d2dBCF034DBBA34A653
-//BODY : {
-//	"Data": {
-//	"Permissions": [
-//		"ReadAccountsDetail",
-//
-//		"ReadTransactionsCredits",
-//
-//		"ReadTransactionsDetail"
-//	],
-//	"ExpirationDateTime": "2018-01-19T00:00:00.875",
-//	"TransactionFromDateTime": "2014-01-19T00:00:00.800",
-//	"TransactionToDateTime": "2017-01-19T00:00:00.345"
-//},
-//"Risk": {}
-//}
-
