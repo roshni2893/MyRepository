@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Step2 {
 
@@ -15,9 +20,24 @@ public class Step2 {
 		RestTemplate restTemplate = new RestTemplate();
 		// url
 		String url = "https://psd2.apiboidev.com/1/api/open-banking/v1.0/account-requests";
-		System.out.println("url is: "+url);
+		System.out.println("url is: " + url);
 		// body
 		String requestJson = "{\"Data\": {\"Permissions\": [\"ReadAccountsDetail\",\"ReadTransactionsCredits\",\"ReadTransactionsDetail\"],\"ExpirationDateTime\": \"2018-01-19T00:00:00.875\",\"TransactionFromDateTime\": \"2014-01-19T00:00:00.800\",\"TransactionToDateTime\": \"2017-01-19T00:00:00.345\"},\"Risk\": {} }";
+		
+		// Read from File to String
+		JsonObject jsonObject = new JsonObject();
+		try {
+			JsonParser parser = new JsonParser();
+			JsonElement jsonElement = parser.parse(new FileReader("E:/jsonFile/json.txt"));
+			requestJson = jsonElement.toString();
+		} catch (FileNotFoundException e) {
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+		
+		
+		
 		// headers
 		HttpHeaders headers = new HttpHeaders();
 		Map<String, String> headersMap = new HashMap<>();
