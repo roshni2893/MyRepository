@@ -1,3 +1,4 @@
+package sid.work.station;
 import java.io.IOException;
 
 public class Automation {
