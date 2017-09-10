@@ -18,11 +18,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Step1 {
 
 	public static String step1() throws IOException {
-		String url = "https://psd2.apiboidev.com/openbanking-nOAuth/oauth/token";
+		String url = Constants.STEP1_URL;
 		MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
-		paramsMap.add("client_id", "d6b2db030fce4ef4b64eb2d38031e2e2");
-		paramsMap.add("client_secret", "bf5b58ee0bbe473dA221DE7AA9D175A0");
-		paramsMap.add("grant_type", "client_credentials");
+		paramsMap.add("client_id", Constants.STEP1_CLIENT_ID);
+		paramsMap.add("client_secret", Constants.STEP1_CLIENT_SECRET);
+		paramsMap.add("grant_type", Constants.STEP1_GRANT_TYPE);
 		Map<String, String> headersMap = new HashMap<>();
 		String clientCredAccessToken = getValueFromGetApiCall(url, paramsMap, headersMap, "access_token");
 		return clientCredAccessToken;
