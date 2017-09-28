@@ -1,5 +1,7 @@
 package sid.work.station;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,11 @@ import org.springframework.util.MultiValueMap;
 
 public class Step4 {
 
-	public static String step4(String code) throws IOException {
+	public static String step4(String code) throws IOException, KeyManagementException, NoSuchAlgorithmException {
+		if (code == null || code.length() == 0) {
+			System.out.println("Something went wrong in Authorization !!");
+			System.exit(0);
+		}
 		// Step4
 		//String code = "9OsCQH";
 		String url4 = Constants.STEP4_URL;

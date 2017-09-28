@@ -1,13 +1,23 @@
 {  
    "Data":{  
       "Permissions":[  
-         "ReadAccountsDetail",
-         "ReadTransactionsCredits",
-         "ReadTransactionsDetail"
+			"ReadAccountsDetail",
+			"ReadAccountsBasic",
+			"ReadBalances",
+			"ReadBeneficiariesBasic",
+			"ReadBeneficiariesDetail",
+			"ReadDirectDebits",
+			"ReadProducts",
+			"ReadStandingOrdersBasic",
+			"ReadStandingOrdersDetail",
+			"ReadTransactionsBasic",
+			"ReadTransactionsCredits",
+			"ReadTransactionsDebits",
+			"ReadTransactionsDetail"
       ],
-      "ExpirationDateTime":"2018-01-19T00:00:00.875",
+      "ExpirationDateTime":"2019-01-19T00:00:00.875",
       "TransactionFromDateTime":"2014-01-19T00:00:00.800",
-      "TransactionToDateTime":"2017-01-19T00:00:00.345"
+      "TransactionToDateTime":"2019-01-19T00:00:00.345"
    },
    "Risk":{  
    }

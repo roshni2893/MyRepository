@@ -1,4 +1,5 @@
 package sid.work.station;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,6 +18,10 @@ import com.google.gson.JsonParser;
 public class Step2 {
 
 	public static String step2(String clientCredAccessToken) throws IOException {
+		if (clientCredAccessToken == null || clientCredAccessToken.length() == 0) {
+			System.out.println("Something went wrong in generating client cred.!!");
+			System.exit(0);
+		}
 		RestTemplate restTemplate = new RestTemplate();
 		// url
 		String url = Constants.STEP2_URL;

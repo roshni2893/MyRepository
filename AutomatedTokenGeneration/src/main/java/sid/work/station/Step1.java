@@ -1,5 +1,7 @@
 package sid.work.station;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Step1 {
 
-	public static String step1() throws IOException {
+	public static String step1() throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		String url = Constants.STEP1_URL;
 		MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
 		paramsMap.add("client_id", Constants.STEP1_CLIENT_ID);
@@ -30,10 +32,16 @@ public class Step1 {
 	}
 	
 	static String getValueFromGetApiCall(String url, MultiValueMap<String, String> queryParamsMap,
-			Map<String, String> queryHeaders, String requiredValue) throws IOException {
+			Map<String, String> queryHeaders, String requiredValue) throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url).queryParams(queryParamsMap);
 		UriComponents finalUri = builder.build();
 		System.out.println("url is: "+finalUri);
+		
+		
+		//CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
+		//ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+		//	RestTemplate rt = new RestTemplate(requestFactory);
+		
 		RestTemplate rt = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAll(queryHeaders);
